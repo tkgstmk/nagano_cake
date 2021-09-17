@@ -1,0 +1,39 @@
+<%#= flash[:notice] %>
+<%#= flash[:success]  %>
+
+<h2>商品詳細</h2>
+<div class="container px-5 px-sm-0" >
+  <div class="row">
+    <div class="col-md-10">
+      <section class="item">
+        <!--画像-->
+        <div class="items">
+          <%= attachment_image_tag @user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
+        </div>
+        <!--紹介文-->
+        <div class="items">
+          <div class="items_list">
+            <div class="name">
+              <ul>
+                <li>商品名</li>
+                <li>商品説明</li>
+                <li>ジャンル</li>
+                <li>税込価格<br>(税抜価格)</li>
+                <li>販売ステータス</li>
+              </ul>
+              <ul>
+                <% @item.each do |item| %>
+                <li><%= item.name %></li>
+                <li><%= item.introduction %></li>
+                <li><%= item.genre %></li>
+                <li><%= item.price %></li>
+                <td><%= item.active %></td>
+            </div>
+          </div>
+        </div>
+      <%= f.submit '新規登録' %>
+      </section>
+    </div>
+  </div>
+</div>
+  

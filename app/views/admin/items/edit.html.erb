@@ -1,0 +1,42 @@
+<h2>編集画面</h2>
+ <!--エラー文-->
+  <% if @item.errors.any? %>
+    <%= @item.errors.count %>件のerrorが発生しました
+    <% @item.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+  
+  
+  <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <div class="item">
+    <div class="title">
+      <ul>
+        <li>商品画像</li>
+        <li>商品名</li>
+        <li>商品説明</li>
+        <li>ジャンル</li>
+        <li>税抜価格</li>
+        <li>販売ステータス</li>
+      </ul>
+    </div>
+    <div class="body">
+      <ul>
+        <%= form_with model: @item, url: '/items', local:true do |f| %>
+        <li><%= attachment_image_tag @item, :image, size: "100x120", fallback: "noimage.png" %>選択されていません</li>
+        <li><%= f.text_field :name %></li>
+        <li><%= f.text_area :introduction %></li>
+        <li><%= f.select :genre, @genres, {include_blank:'選択してください'} %></li>
+        <li><%= f.text_field :price %></li>
+        <li><%= form_with(model: @item, local: true) do |f| %>
+              <%= form.radio_button :active, :sale %>
+              <%= form.label :genre, "販売中", {value: :sale, style: "display: inline-block;"} %>
+              <%= form.radio_button :active, :stop %>
+              <%= form.label :genre, "販売停止中", {value: :stop, style: "display: inline-block;"} %>
+            <% end %>
+        </li>
+        <% end %>
+      </ul>
+      <%= f.submit '変更を保存' %>
+    </div>
+  </div>
