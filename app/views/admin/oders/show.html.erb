@@ -1,0 +1,80 @@
+<h2>注文履歴詳細</h2>
+<section class="table">
+  <div class="title">
+    <ul>
+      <li>購入者</li>
+      <li>注文日</li>
+      <li>配送先</li>
+      <li>支払方法</li>
+      <li>注文ステータス</li>
+    </ul>
+  </div>
+  <div class="body">
+    <ul>
+      <%= link_to customer_path(@customer) do %>
+      <li><%= @customer.last_name %><%= @customer.first_name %></li>
+      <li><%= l @customer.created_at, format: :short %></li>
+      <li><%= @customer.address %></li>
+      <li><%= @customer.payment_method %></li>
+      <li><%= form_with model: @customer do |f| %>
+            <%= f.select :is_active, [["入金待ち", "入金待ち"], ["入金確認", "入金確認"], ["製作中", "製作中"], ["発送準備中", "発送準備中"]], include_blank: @customer.is_active %>
+            <%= f.submit '更新'%>
+          <% end %>
+      </li>
+      <% end %>
+    <ul>
+  </div>
+</section>
+
+<section class="oder_list">
+  <div class="list">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>単価（税込）</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>製作ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= link_to oder_path(@item) do %>
+          <tr>
+            <td><%= @item.name %></td>
+            <td><%= (@item.price).to_i %></td>
+            <td><%= @item_count %></td>
+            <td><%= (@oder.total_price).to_i %></td>
+            <li><%= form_with model: @oder_details do |f| %>
+                  <%= f.select :is_active, [["着手不可", "着手不可"], ["製作待ち", "製作待ち"], ["製作中", "製作中"], ["製作完了", "製作完了"]], include_blank: @oder_details.is_active %>
+                  <%= f.submit '更新'%>
+                <% end %>
+            </li>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="price">
+      <ul>
+        <li>商品合計</li>
+        <li>送料</li>
+        <li>請求金額</li>
+      </ul>
+      <ul>
+        <%= link_to oder_path(@item) do %>
+        <li><%= (@oder.total_price).to_i %>円</li>
+        <li>800円</li>
+        <li><%= (@oder.total_payment).to_i %>円</li>
+        <% end %>
+      </ul>
+
+
+
+
+
+    <% @sum = 0 %>
+<% @cart.each do |item| %>
+
+<%＝ @sum %>

@@ -29,10 +29,10 @@
         <li><%= f.select :genre, @genres, {include_blank:'選択してください'} %></li>
         <li><%= f.text_field :price %></li>
         <li><%= form_with(model: @item, local: true) do |f| %>
-              <%= form.radio_button :active, :sale %>
-              <%= form.label :genre, "販売中", {value: :sale, style: "display: inline-block;"} %>
-              <%= form.radio_button :active, :stop %>
-              <%= form.label :genre, "販売停止中", {value: :stop, style: "display: inline-block;"} %>
+              <%= f.radio_button :active, :sale %>
+              <%= f.label :genre, "販売中", {value: :sale, style: "display: inline-block;"} %>
+              <%= f.radio_button :active, :stop %>
+              <%= f.label :genre, "販売停止中", {value: :stop, style: "display: inline-block;"} %>
             <% end %>
         </li>
         <% end %>

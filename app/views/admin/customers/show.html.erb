@@ -1,0 +1,40 @@
+<%#= flash[:notice] %>
+<%#= flash[:success]  %>
+
+<div class="container px-5 px-sm-0" >
+  <div class="row">
+    <div class="col-md-8 offset-md-1">
+      <%= link_to customer_path(@customer) do %>
+      <h2><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h2>
+        <section class="table">
+          <div class="title">
+            <ul>
+              <li>会員ID</li>
+              <li>氏名</li>
+              <li>フリガナ</li>
+              <li>郵便番号</li>
+              <li>住所</li>
+              <li>電話番号</li>
+              <li>メールアドレス</li>
+              <li>会員ステータス</li>
+            </ul>
+          </div>
+          <div class="body">
+            <ul>
+              <li><%= @customer.id %></li>
+              <li><%= @customer.last_name %><%= @customer.first_name %></li>
+              <li><%= @customer.last_name_kana %><%= @customer.first_name_kana %></li>
+              <li><%= @customer.postal_code %></li>
+              <li><%= @customer.address %></li>
+              <li><%= @customer.telephone_number %></li>
+              <li><%= @customer.email %></li>
+              <li><%= @customer.is_active %></li>
+            <ul>
+          </div>
+        </section>
+        <%= link_to '編集する' edit_customer_path(@customer) %>
+        <%= link_to '注文履歴一覧画面を見る' %>
+      <% end %>
+    </div>
+  </div>
+</div>

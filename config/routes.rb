@@ -17,8 +17,10 @@ Rails.application.routes.draw do
 
   get 'search' => 'posts#search'
 
-  resource :genres, only: [:index, :create, :edit, :update]
-  resource :items, only: [:index, :new, :create, :show, :edit, :update]
+  scope module: :admin do
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
+  end
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
