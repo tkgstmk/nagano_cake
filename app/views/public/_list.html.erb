@@ -19,22 +19,22 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-        <% if user_signed_in? %>
+        <% if signed_in? %>
           <li><%= link_to "Home", user_path(current_user), class:"fas fa-home nav-link text-light" %></li>
           <li><%= link_to "Users", users_path, class:"fas fa-users nav-link text-light" %></li>
           <li><%= link_to "Books", books_path, class:"fas fa-book-open nav-link text-light" %></li>
           <li><%= link_to "logout", destroy_user_session_path, method: :delete, class:"fas fa-sign-out-alt nav-link text-light" %></li>
         <% else %>
-          <li><%= link_to "About", root_path %></li>
-          <li><%= link_to "商品一覧", about_home_path %></li>
-          <li><%= link_to "新規登録", new_user_registration_path %></li>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
+          <li><%= link_to "About", about_path %></li>
+          <li><%= link_to "商品一覧" %></li>
+          <li><%= link_to "新規登録" %></li>
+          <li><%= link_to "ログイン", new_public_session_path %></li>
    　　　　　 <% end %>
         </ul>
       </div>
     </div>
   </nav>
-  
+
   <!--検索機能-->
 <!--<div class="search-form">-->
 <!--  <%#= form_with url: search_path, method: :get, local: true do |f| %>-->
