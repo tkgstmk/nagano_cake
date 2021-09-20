@@ -7,7 +7,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def index
-    @item = Item
+    @item = Item.new(item_params)
     @items = Item.all
   end
 

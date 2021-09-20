@@ -1,28 +1,33 @@
 <%= render :partial => "public/list" %>
 
+<!--<div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">-->
+<div class="container" >
 <h2>管理者ログイン</h2>
 
-<%= form_with model: @customers, url: user_session_path, local: true do |f| %>
+  <!--<div class="row">-->
+  <!--  <div class="col-md-3">-->
+
+<%= form_with model: @customers, url: customer_session_path, local: true do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :メールアドレス %>　<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.label :パスワード %>　　　<%= f.password_field :password, autocomplete: "current-password" %>
   </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+  <%# if devise_mapping.rememberable? %>
+    <!--<div class="field">-->
+      <%#= f.check_box :remember_me %>
+      <%#= f.label :remember_me %>
+    <!--</div>-->
+  <%# end %>
 
   <div class="actions">
     <%= f.submit "ログイン" %>
   </div>
 <% end %>
 
-<%#= render "admins/shared/links" %>
+
+</div>
+<%#= render "admin/shared/links" %>

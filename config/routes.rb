@@ -5,25 +5,36 @@ Rails.application.routes.draw do
     registrations: 'admin/registrations'
   }
 
-  devise_for :public, controllers: {
+  devise_for :customers, controllers: {
     sessions:      'public/sessions',
     passwords:     'public/passwords',
     registrations: 'public/registrations'
   }
 
-  get '/admin' => 'homes#top', as: '_admin'
+  resources :admin do
+    get :search, on: :collection
+  end
+
+  resources :customers do
+    get :search, on: :collection
+  end
+
+
+
+
 
   get 'public/_list'
   get 'public/about' => 'public#about', as: 'about'
 
 
-  get 'search' => 'posts#search'
+
 
   scope module: :admin do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
   end
-
+ 
+  get '/admin' => 'admin#homes', as: 'top'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
