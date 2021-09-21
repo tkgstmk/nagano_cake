@@ -1,4 +1,5 @@
-<div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+<%= render :partial => "admin/list" %>
+
 <h2>ジャンル編集画面</h2>
  <!--エラー文-->
   <% if @genre.errors.any? %>
@@ -7,7 +8,13 @@
       <%= message %>
     <% end %>
   <% end %>
-
-<%= form_with model: @genre, url:genre_path(@genre), local:true do |f| %>
-<p>ジャンル名</p><%= f.text_field :name %><%= f.submit '変更を保存' %>
+  
+<div class="m-5">
+  <%= form_with model: @genre, url:genre_path(@genre), local:true do |f| %>
+  <p>ジャンル名</p>
+  <div class="mx-5">
+    <%= f.text_field :name %>
+  </div>
+  <%= f.submit '変更を保存', class:"btn btn-success"%>
 <% end %>
+</div>

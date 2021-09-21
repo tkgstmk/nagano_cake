@@ -21,14 +21,15 @@
           </div>
           <div class="body">
             <ul>
-              <li><%= @customer.id %></li>
-              <li><%= @customer.last_name %><%= @customer.first_name %></li>
-              <li><%= @customer.last_name_kana %><%= @customer.first_name_kana %></li>
-              <li><%= @customer.postal_code %></li>
-              <li><%= @customer.address %></li>
-              <li><%= @customer.telephone_number %></li>
-              <li><%= @customer.email %></li>
-              <li><%= @customer.is_active %></li>
+              <% @customer.each do |customer| %>
+              <li><%= customer.id %></li>
+              <li><%= customer.last_name %><%= customer.first_name %></li>
+              <li><%= customer.last_name_kana %><%= customer.first_name_kana %></li>
+              <li><%= customer.postal_code %></li>
+              <li><%= customer.address %></li>
+              <li><%= customer.telephone_number %></li>
+              <li><%= customer.email %></li>
+              <li><%= customer.is_active %></li>
             <ul>
           </div>
         </section>

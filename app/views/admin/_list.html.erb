@@ -1,0 +1,43 @@
+<!--adminのヘッダー-->
+  <head>
+    <title>ログイン</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light bg-light mb-2 border-bottom">
+      <!--ロゴ-->
+      <%= image_tag 'ogo.jpg', size: "80x80" %>
+      <div>
+        <ul class="nav pull-right nav-pills">
+        <% if signed_in? %>
+          <li class="nav-list"><%= link_to "商品一覧", items_path, class:'btn btn-outline-dark' %></li>
+          <li class="nav-list"><%= link_to "会員一覧", customers_path, class:'btn btn-outline-dark' %></li>
+          <li class="nav-list"><%= link_to "注文履歴一覧", top_path, class:'btn btn-outline-dark' %></li>
+          <li class="nav-list"><%= link_to "ジャンル一覧", genres_path, class:'btn btn-outline-dark' %></li>
+          <li class="nav-list"><%= link_to "ログアウト", #destroy_admin_session_path, method: :delete, class:"btn btn-outline-dark" %></li>
+        <% else %>
+          <li class="nav-list"><%= link_to "About", about_path, class:"btn btn-outline-dark" %></li>
+          <li class="nav-list"><%= link_to "商品一覧", class:"btn btn-outline-dark" %></li>
+          <li class="nav-list"><%= link_to "新規登録", class:"btn btn-outline-dark" %></li>
+          <li class="nav-list"><%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-dark" %></li>
+        <% end %>
+        </ul>
+        <ul class="nav pull-right">
+          <li>
+            <%= form_tag customers_path, :method => 'get' do %>
+            <p>
+              <%= text_field_tag :search, params[:search] %>
+              <%= submit_tag "Search", :name => nil %>
+            </p>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <%= yield %>
+  </body>

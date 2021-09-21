@@ -1,9 +1,6 @@
 class Admin::OdersController < ApplicationController
-  def top
-    @customers = Customer.all
-    @oder = Oder.find(params[:id])
-    @oders_count = Oder.where(oder_id: @oder.id).count
-  end
+
+has_many :order_details
 
   def show
     @customers = Customer.all

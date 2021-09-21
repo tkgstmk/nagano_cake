@@ -1,12 +1,12 @@
-<%= render :partial => "public/list" %>
+<%= render :partial => "admin/list" %>
 
 <%#= flash[:alert] %>
 <%#= flash[:notice] %>
 <%#= flash[:success] %>
-<script src="https://kit.fontawesome.com/4901d39935.js" crossorigin="anonymous"></script>
+
 
 <h2>商品一覧</h2>
-<%= link_to "", new_items_path, class:"far fa-plus-square" %>
+<%= link_to "", new_item_path, class:"far fa-plus-square" %>
   <!--エラー文-->
     <% if @item.errors.any? %>
       <%= @item.errors.count %>件のerrorが発生しました
@@ -31,7 +31,7 @@
         <tbody>
           <% @items.each do |item| %>
           <tr>
-            <td><%= item(@item.id) %></td>
+            <td><%= item(item.id) %></td>
             <td><%= link_to item.name, item_path %></td>
             <td><%= item.price %></td>
             <td><%= item.genre %></td>

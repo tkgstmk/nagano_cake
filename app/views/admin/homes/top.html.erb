@@ -1,4 +1,4 @@
-<%= render :partial => "public/list" %>
+<%= render :partial => "admin/list" %>
 
 <h2>注文履歴一覧</h2>
 <div class="container px-5 px-sm-0" >
@@ -14,12 +14,12 @@
           </tr>
         </thead>
         <tbody>
-          <% @customers.each do |customer| %>
+          <% @oders.each do |oder| %>
           <tr>
-            <td><%= l customer.created_at %></td>
-            <td><%= customer.last_name %><%= customer.first_name %></td>
-            <td><%= @oders_count %></td>
-            <td><%= @oder.is_active %></td>
+            <td><%= l oder.created_at %></td>
+            <td><%= oder.customrt_id.last_name %><%= oder.customrt_id.first_name %></td>
+            <td><%= oder.count %></td>
+            <td><%= oder.status %></td>
           </tr>
           <% end %>
         </tbody>

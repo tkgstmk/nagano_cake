@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :admin, controllers:{
-    sessions:      'admin/sessions',
-    passwords:     'admin/passwords',
-    registrations: 'admin/registrations'
-  }
+ scope module: :admin do
+  get '/admin' => 'homes#top', as: 'top'
+ end
+
+  # devise_for :admin, controllers:{
+  #   sessions:      'admin/sessions'
+  # }
 
   devise_for :customers, controllers: {
     sessions:      'public/sessions',
@@ -32,9 +34,11 @@ Rails.application.routes.draw do
   scope module: :admin do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    resources :oders, only: [:show]
+    resources :customers, only: [:index, :edit, :show]
   end
- 
-  get '/admin' => 'admin#homes', as: 'top'
+
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

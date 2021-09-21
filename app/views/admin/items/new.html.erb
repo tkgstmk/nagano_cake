@@ -1,14 +1,14 @@
-<%= render :partial => "public/list" %>
+<%#= render :partial => "admin/list" %>
 
 <h2>商品新規登録</h2>
 <!--エラー文-->
-  <% if @item.errors.any? %>
-    <%= @item.errors.count %>件のerrorが発生しました
-      <% @item.errors.full_messages.each do |message| %>
-        <%= message %>
-      <% end %>
-  <% end %>
-  
+  <%# if @item.errors.any? %>
+    <%#= @item.errors.count %>件のerrorが発生しました
+      <%# @item.errors.full_messages.each do |message| %>
+        <%#= message %>
+      <%# end %>
+  <%# end %>
+
 <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
   <div class="item">
     <div class="title">
@@ -29,15 +29,14 @@
         <li><%= f.text_area :introduction %></li>
         <li><%= f.select :genre, @genres, {include_blank:'選択してください'} %></li>
         <li><%= f.text_field :price %></li>
-        <li><%= form_with(model: @item, local: true) do |f| %>
-              <%= form.radio_button :active, :sale %>
-              <%= form.label :genre, "販売中", {value: :sale, style: "display: inline-block;"} %>
-              <%= form.radio_button :active, :stop %>
-              <%= form.label :genre, "販売停止中", {value: :stop, style: "display: inline-block;"} %>
+        <li><%= form_with model:@item, local: true do |f| %>
+              <%= form.radio_button :is_active, :sale %>
+              <%= form.label :item, "販売中", {value: :sale, style: "display: inline-block;"} %>
+              <%= form.radio_button :is_active, :stop %>
+              <%= form.label :item, "販売停止中", {value: :stop, style: "display: inline-block;"} %>
             <% end %>
         </li>
         <% end %>
       </ul>
     </div>
   </div>
-        
