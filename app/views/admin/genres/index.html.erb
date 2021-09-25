@@ -4,14 +4,14 @@
 <%#= flash[:notice] %>
 <%#= flash[:success] %>
 
-<div class="container px-5 px-sm-0" >
+<div class="container pt-2 px-5 px-sm-0" >
   <h4><span class="text-dark bg-light">ジャンル一覧・追加</span></h4>
 
     <div class="m-5">
       <div class="nav pull-right nav-pills">
         <p>ジャンル名</p>
         <div class="mx-5">
-          <%= form_with model: @genre, url: '/b', local:true do |f| %>
+          <%= form_with model: @genre, url: genres_path, local:true do |f| %>
           <%= f.text_field :name %>
         </div>
         <%= f.submit '新規登録', class:"btn btn-success" %>
@@ -32,7 +32,7 @@
           <% @genres.each do |genre| %>
           <tr>
             <td><%= genre.name %></td>
-            <td><%= link_to "編集する", edit_book_path(book), class:"btn btn-success" %></td>
+            <td><%= link_to "編集する", edit_genre_path(genre), class:"btn btn-success" %></td>
           </tr>
            <% end %>
         </tbody>

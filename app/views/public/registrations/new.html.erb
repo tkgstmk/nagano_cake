@@ -1,29 +1,101 @@
-<h2>Sign up</h2>
+<%= render :partial => "public/list" %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "customers/shared/error_messages", resource: resource %>
+<div class="container" >
+  <span class="text-white bg-dark font3">　新規会員登録　</span>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <div>
+    <table class="table-borderles m-3">
+      <%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', local: true do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <tr>
+        <td>名前</td>
+        <td>（姓）</td>
+        <td><%= f.email_field :last_name, autofocus: true, autocomplete: "last_name", placeholder: "令和" %></td>
+        <td></td>
+        <td>（名）</td>
+        <td><%= f.email_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "道子" %></td>
+      </tr>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <tr>
+        <td>フリガナ</td>
+        <td>（セイ）</td>
+        <td><%= f.email_field :last_name_kana, autofocus: true, autocomplete: "last_name", placeholder: "レイワ" %></td>
+        <td></td>
+        <td>（メイ）</td>
+        <td><%= f.email_field :first_name_kana, autofocus: true, autocomplete: "first_name", placeholder: "ミチコ" %></td>
+      </tr>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+      <tr>
+        <td>メールアドレス</td>
+        <td></td>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+      <tr>
+        <td>郵便番号（ハイフンなし）</td>
+        <td></td>
+        <td><%= f.password_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "0000000" %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-<%= render "customers/shared/links" %>
+      <tr>
+        <td>住所</td>
+        <td></td>
+        <td><%= f.password_field :address, autofocus: true, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0" %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      
+      <tr>
+        <td>電話番号（ハイフンなし）</td>
+        <td></td>
+        <td><%= f.password_field :telephone_number, autofocus: true, autocomplete: "telephone_number", placeholder: "00000000000" %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td>パスワード（６文字以上）</td>
+        <td></td>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <td>
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </td>
+        <% end %>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td>パスワード（確認用）</td>
+        <td></td>
+        <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <th></th>
+        <th></th>
+        <td><%= f.submit "新規登録", class:"btn btn-success" %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<span class="text-white bg-dark">　既に登録済みの方　</span>
+  <p>　　<%= link_to 'こちら', new_customer_session_path %>　からログインしてください。</p>
+</div>

@@ -1,0 +1,45 @@
+<%= render :partial => "public/list" %>
+
+<div class="container pt-2 px-5 px-sm-0" >
+  <h4><span class="text-dark bg-light">マイページ</span></h4>
+<h4>登録情報</h4>
+<%= f.submit '編集する', class:"btn btn-success" %>
+
+
+<div class="container px-1 px-sm-0" >
+  <table>
+  <%= form_with model: @customer, url: customers_path, local:true do |f| %>
+    <tr>
+      <th id="name">氏名</th>
+      <td><%= f.text_field :last_name %>　<%= f.text_field :first_name %><td>
+    </tr>
+    <tr>
+      <th id="name_kana">カナ</th>
+      <td><%= f.text_field :last_name_kana %>　<%= f.text_field :first_name_kana %><td>
+    </tr>
+    
+    <tr>
+      <th id="postal_code">郵便馬号</th>
+      <td><%= f.text_field :postal_code %><td>
+    </tr>
+    
+    <tr>
+      <th id="address">住所</th>
+      <td><%= f.text_field :address %><td>
+    </tr>
+    
+    <tr>
+      <th id="telephone_number">電話番号</th>
+      <td><%= f.text_field :telephone_number %><td>
+    </tr>
+    
+    <tr>
+      <th id="email">メールアドレス</th>
+      <td><%= f.text_field :email %><td>
+    </tr>
+  <% end %>
+  </table>
+  
+  <h4>配送先 　　<%= f.submit '一覧を見る', class:"btn btn-success" %></h4>
+  <h4>注文履歴 　<%= f.submit '一覧を見る', class:"btn btn-success" %></h4>
+    

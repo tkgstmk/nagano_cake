@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   get '/admin' => 'homes#top', as: 'top'
  end
 
-  # devise_for :admin, controllers:{
-  #   sessions:      'admin/sessions'
-  # }
+
+
+  devise_for :admins, controllers:{
+    sessions:      'admin/sessions'
+  }
 
   devise_for :customers, controllers: {
     sessions:      'public/sessions',
@@ -13,30 +15,44 @@ Rails.application.routes.draw do
     registrations: 'public/registrations'
   }
 
-  resources :admin do
-    get :search, on: :collection
-  end
+  
 
-  resources :customers do
-    get :search, on: :collection
-  end
-
-
-
-
+ scope module: :public do
+   root 'homes#top'
+  # resources :homes, only: [:top]
+  # get '/' => 'public/homes#top'
+ end
 
   get 'public/_list'
-  get 'public/about' => 'public#about', as: 'about'
+  get 'public/homes/about' => 'public/homes#about', as: 'about'
 
 
 
 
-  scope module: :admin do
+
+
+
+
+  scope module: :public do
+    get '/customers/mypage' => 'customers#show'
+    resources :customers, only: [:edit, :update, :comfirm, :withdrawal]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+    resources :items, only: [:index, :show]
+  end
+
+  resources :customers, except: [:inde] do
+    get :search, on: :collection
+  end
+
+  namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
-    resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    resources :items, only: [:index, :new, :create, :show, :edit, :update] do
+      get :search, on: :collection
+    end
     resources :oders, only: [:show]
     resources :customers, only: [:index, :edit, :show]
   end
+
 
 
 

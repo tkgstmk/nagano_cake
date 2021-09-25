@@ -1,26 +1,28 @@
-<h2>Log in</h2>
+<%= render :partial => "public/list" %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container my-7" >
+  <h4>ログイン</h4>
+  <span class="text-white bg-dark font3 my-3">　会員の方はこちらからログイン　</span>
+
+  <div>
+    <table class="table-borderles m-3">
+      <%= form_with model: @customer, url: customer_session_path, local: true do |f| %>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+      </tr>
+        <th>パスワード</th>
+        <td><%= f.password_field :encrypted_password, autofocus: true, autocomplete: "encrypted_password" %></td>
+      </tr>
+      </tr>
+        <th></th>
+        <td><%= f.submit "ログイン", class:"btn btn-primary my-10" %></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+<span class="text-white bg-dark font3">　ログインがお済みでない方　</span>
+  <p>　　<%= link_to 'こちら', new_customer_registration_path %>　から新規登録を行ってください。</p>
+</div>

@@ -1,9 +1,13 @@
 class Admin::ItemsController < ApplicationController
   has_many :order_details
+
   validates :name, presence: true
   validates :price, presence: true
   validates :genre, presence: true
   validates :active, presence: true
+
+  def search
+  end
 
   def index
     @item = Item.new

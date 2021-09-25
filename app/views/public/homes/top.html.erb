@@ -1,0 +1,40 @@
+<%= render :partial => "public/list" %>
+
+<div class="container px-sm-0" >
+  <div class="row">
+    <div class="col-md-2">
+      <!--ジャンル検索-->
+      <table class="table-bordered">
+        <thead>
+          <tr>
+            <th>ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%# @genres.each do |genre| %>
+          <tr>
+            <td>
+              <%#= genre.name %>
+            </td>
+          </tr>
+          <%# end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-2">
+      <%= image_tag 'shop_top.jpeg', size: '648x324' %>
+    </div>
+    <h3>新着商品</h3>
+    <% @items.each do |item| %>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <%= image_tag item.image,  size: "50x50", fallback: "noimage.jpg" %>
+        <%#= image_tag('sample-author1.jpg') %>
+        <!--image_tag post.picture.to_s-->
+        <%= item.name %>
+        <%= item.price %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

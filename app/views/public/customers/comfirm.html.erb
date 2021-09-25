@@ -1,0 +1,10 @@
+<%= render :partial => "public/list" %>
+
+<h4>本当に退会しますか？</h4>
+
+<p class="d-flex justify-content-center">退会すると、会員情報や</p>
+<p class="d-flex justify-content-center">これまでの購入履歴が閲覧できなくなります。</p>
+<p class="d-flex justify-content-center">退会する場合は、「退会する」をクリックしてください。</p>
+
+<%= f.submit "退会しない", class:"btn btn-success" %>
+<%= f.submit "退会する", class:"btn btn-danger" %>

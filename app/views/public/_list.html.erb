@@ -1,70 +1,30 @@
-<!--customersのヘッダー-->
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>ログイン</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-  <body>
-    <nav class="navbar navbar-light bg-light mb-2 border-bottom">
-
-      <!--ロゴ-->
-      <%= image_tag "logo.jpg", size: "80x80" %>
-
-      <div>
-        <ul class="nav pull-right nav-pills">
-        <% if signed_in? %>
-          <li class="nav-list"><%= link_to "Home", user_path(current_user), class:"btn btn-outline-dark" %></li>
-          <li class="nav-list"><%= link_to "Users", users_path, class:"btn btn-outline-dark" %></li>
-          <li class="nav-list"><%= link_to "Books", books_path, class:"btn btn-outline-dark" %></li>
-          <li class="nav-list"><%= link_to "logout", destroy_user_session_path, method: :delete, class:"btn btn-outline-dark" %></li>
-        <% else %>
-          <li class="nav-list"><%= link_to "About", about_path, class:"btn btn-outline-dark" %></li>
-          <li class="nav-list"><%= link_to "商品一覧", class:"btn btn-outline-dark" %></li>
-          <li class="nav-list"><%= link_to "新規登録", class:"btn btn-outline-dark" %></li>
-          <li class="nav-list"><%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-dark" %></li>
-   　　 　 <% end %>
-        </ul>
-        <ul class="nav pull-right">
-          <li>
-              <!--検索機能-->
-<!--<div class="search-form">-->
-<!--  <%#= form_with url: search_path, method: :get, local: true do |f| %>-->
-<!--    <%#= f.text_field :keyword, value: @keyword %>-->
-<!--    <%#= f.submit "検索" %>-->
-<!--  <%# end %>-->
-<!--</div>-->
-<!--<div class="post-list">-->
-<!--  <%# @posts.each do |post| %>-->
-<!--    <%#= post.title %>-->
-<!--  <%# end %>-->
-<!--</div>-->
-<!--    </header>-->
-
-<%= form_tag customers_path, :method => 'get' do %> <%#　projects_pathはモデル名で読みかえること %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
-
-
-
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-
-
-
-    <%= yield %>
-  </body>
-  <footer>
-  </fotter>
-</html>
+<!--publis-->
+<nav class="navbar navbar-light bg-light mb-2 border-bottom">
+  <!--ロゴ-->
+  <%= image_tag 'logo.jpg', size: "80x80" %>
+  <div>
+    <ul class="nav pull-right nav-pills">
+    <% if admin_signed_in? %>
+      <li class="nav-list"><%= link_to "マイページ", customers_mypage_path, class:'btn btn-outline-dark' %></li>
+      <li class="nav-list"><%= link_to "商品一覧", admin_items_path, class:'btn btn-outline-dark' %></li>
+      <li class="nav-list"><%#= link_to "カート", cart_items_path, class:'btn btn-outline-dark' %></li>
+      <li class="nav-list"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-outline-dark" %></li>
+    <% else %>
+      <li class="nav-list"><%= link_to "About", about_path, class:"btn btn-outline-dark" %></li>
+      <li class="nav-list"><%= link_to "商品一覧", class:"btn btn-outline-dark" %></li>
+      <li class="nav-list"><%= link_to "新規登録", class:"btn btn-outline-dark" %></li>
+      <li class="nav-list"><%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-dark" %></li>
+    <% end %>
+    </ul>
+    <ul class="nav pull-right">
+      <li>
+        <%= form_tag customers_path, :method => 'get' do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search", :name => nil %>
+        </p>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>

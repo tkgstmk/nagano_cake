@@ -1,0 +1,26 @@
+<%= render :partial => "public/list" %>
+
+<h4>配送先編集</h4>
+
+
+<div class="container px-1 px-sm-0" >
+  <%= form_with model: @address, url: addresses_path(@address), local: true do |f| %>
+  <table style="boder:none;">
+    <tr>
+      <td>郵便番号（ハイフンなし）</td>
+      <td><%= f.text_field :postal_code %><td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td class="table table-bordered"><%= f.text_field :address, :size => "50*30"%><td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>宛名</td>
+      <td><%= f.text_field :name %><td>
+      <td><%= f.submit "変更内容を保存", class:"btn btn-success"%></td>
+    </tr>
+  </table>
+  <% end %>
+</div>
