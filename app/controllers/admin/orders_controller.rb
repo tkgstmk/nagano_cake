@@ -1,17 +1,17 @@
-class Admin::OdersController < ApplicationController
+class Admin::OrdersController < ApplicationController
 
 has_many :order_details
 
   def show
     @customers = Customer.all
-    @oder = Oder.find(params[:id])
-    @oders_count = Oder.where(oder_id: @oder.id).count
+    @order = Order.find(params[:id])
+    @orders_count = Order.where(order_id: @order.id).count
   end
 
 
   private
-  def oder_params
-    params.require(:oder).permit(:is_active)
+  def order_params
+    params.require(:order).permit(:is_active)
   end
 
   def customer_params

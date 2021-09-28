@@ -1,0 +1,29 @@
+<%= render :partial => "public/list" %>
+
+<div class="container px-sm-0" >
+<h4>注文履歴一覧</h4>
+
+<table class="table-bordered">
+  <thead>
+    <tr>
+      <th>注文日</th>
+      <th>配送先</th>
+      <th>注文商品</th>
+      <th>支払金額</th>
+      <th>ステータス</th>
+      <th>注文詳細</th>
+    </tr>
+  </thead>
+  <% @orders.each do |order| %>
+  <tbody>
+    <tr>
+      <td><%= order.created_at %></td>
+      <td><%= order.address %></td>
+      <td><%= order.item %></td>
+      <td><%= order.total_payment %></td>
+      <td><%= order.status %></td>
+      <td><%= button_to '表示する', '/orders/show', method: :get, class: "btn btn-primary" %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

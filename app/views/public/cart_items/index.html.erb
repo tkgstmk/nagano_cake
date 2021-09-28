@@ -1,0 +1,55 @@
+<%= render :partial => "public/list" %>
+
+<div class="container px-sm-0" >
+  <h4>ショッピングカート</h4>
+    <div class="text-right">
+      <%#= link_to "カートを空にする", book_path(book), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+      <%= button_to 'カートを空にする', @cart_items, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: 'fbtn' %>
+    </div>
+      <table class="table-bordered">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @items.each do |item| %>
+        <tbody>
+          <tr>
+            <td>
+              <ul class="nav pull-right nav-pills">
+                <li class="nav-list"><%= image_tag item.image, size: "50x50", fallback: "noimage.jpg" %></li>
+                <li class="nav-list"><%= item.name %></li>
+              </ul>
+            </td>
+            <td><%= item.price %></td>
+            <td><%= item.amount :count, {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5}, { class: 'form-control' , required: true } %>
+                <%= link_to "編集する", cart_items_path(@cart_items) %>
+            </td>
+            <td>小計</td>
+            <td><%= link_to "削除する", cart_items_path(@cart_items), method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
+          </tr>
+          <tr>
+            <th class="table-borderles"></th>
+            <th class="table-borderles"></th>
+            <th class="table-borderles"></th>
+            <th class="table-borderles"></th>
+            <th class="table-borderles"></th>
+          </tr>
+          <tr>
+            <th><%= button_to '買い物を続ける', @cart_items, method: :delete, class: 'fbtn' %></th>
+            <th></th>
+            <th></th>
+            <th>会計金額</th>
+            <th>合計金額</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row justify-content-center"><%= button_to '情報入力に進む', '/orders/new', method: :get, class: "btn btn-primary" %></div>
+
+<%#= link_to "編集する", edit_address_path(@address) %>
+        <%#= link_to "削除する", address_path(@address), method: :delete, data: {confirm: "本当に削除しますか？"} %>

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     registrations: 'public/registrations'
   }
 
-  
+
 
  scope module: :public do
    root 'homes#top'
@@ -38,6 +38,10 @@ Rails.application.routes.draw do
     resources :customers, only: [:edit, :update, :comfirm, :withdrawal]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :items, only: [:index, :show]
+    resources :cart_items, only: [:index]
+    resources :orders, only: [:index, :show, :new]
+    post '/orders/confirm' => 'orders#confirm'
+    get '/orders/thanks' => 'orders#thanks'
   end
 
   resources :customers, except: [:inde] do
@@ -49,7 +53,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create, :show, :edit, :update] do
       get :search, on: :collection
     end
-    resources :oders, only: [:show]
+    resources :orders, only: [:show]
     resources :customers, only: [:index, :edit, :show]
   end
 

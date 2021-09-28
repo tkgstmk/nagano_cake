@@ -28,7 +28,7 @@
     <h3>新着商品</h3>
     <% @items.each do |item| %>
       <div class="col-lg-3 col-md-6 mb-4">
-        <%= image_tag item.image,  size: "50x50", fallback: "noimage.jpg" %>
+        <%= image_tag item.image,size: "50x50", fallback: "noimage.jpg" %>
         <%#= image_tag('sample-author1.jpg') %>
         <!--image_tag post.picture.to_s-->
         <%= item.name %>

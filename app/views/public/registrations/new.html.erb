@@ -51,7 +51,7 @@
         <td></td>
         <td></td>
       </tr>
-      
+
       <tr>
         <td>電話番号（ハイフンなし）</td>
         <td></td>
@@ -64,16 +64,18 @@
       <tr>
         <td>パスワード（６文字以上）</td>
         <td></td>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <td>
-          <%= f.password_field :password, autocomplete: "new-password" %>
-        </td>
-        <% end %>
+        <td><% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password" %>
         <td></td>
         <td></td>
         <td></td>
       </tr>
+
+
+
+  </div>
 
       <tr>
         <td>パスワード（確認用）</td>
