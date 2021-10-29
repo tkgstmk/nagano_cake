@@ -1,0 +1,28 @@
+<%= render :partial => "admins/list" %>
+
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-10 mt-3">
+      <h4><span class="text-dark bg-light">会員一覧</span></h4>
+  
+      <div class="col-md-10">
+        <table class="table">
+          <tr>
+            <td bgcolor="#f5f5f5">会員ID</td>
+            <td bgcolor="#f5f5f5">氏名</td>
+            <td bgcolor="#f5f5f5">メールアドレス</td>
+            <td bgcolor="#f5f5f5">ステータス</td>
+          </tr>
+          <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.id %></td>
+            <td><%= link_to "#{ customer.last_name } #{ customer.first_name }", customer_path(customer) %></td>
+            <td><%= customer.email %></td>
+            <td><%= customer.is_active %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

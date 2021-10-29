@@ -1,0 +1,28 @@
+<%= render :partial => "admins/list" %>
+
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-10 mt-3">
+      <h4><span class="text-dark bg-light">注文履歴一覧</span></h4>
+      
+      <div class="col-md-10">
+        <table class="table">
+          <tr>
+            <td bgcolor="#f5f5f5">購入日時</td>
+            <td bgcolor="#f5f5f5">購入者</td>
+            <td bgcolor="#f5f5f5">注文個数</td>
+            <td bgcolor="#f5f5f5">注文ステータス</td>
+          </tr>
+          <% @orders.each do |order| %>
+          <tr>
+            <td><%= l order.created_at %></td>
+            <td><%= order.customer t_id.last_name %><%= order.customer t_id.first_name %></td>
+            <td><%= order.count %></td>
+            <td><%= order.status %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
