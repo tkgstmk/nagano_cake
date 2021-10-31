@@ -1,0 +1,43 @@
+<%= render :partial => "public/list" %>
+
+<div class="container px-sm-0" >
+  <div class="row">
+    <div class="col-2 mt-4">
+      <!--ジャンル検索-->
+      <%# @genres.each do |genre| %>
+      <table class="table-bordered">
+        <tr>
+          <td>ジャンル検索</td>
+        </tr>
+        <tr>
+          <td><%#= genre.name %></td>
+        </tr>
+      </table>
+      <%# end %>
+    </div>
+
+    <div class="col-md-4">
+      <%= attachment_image_tag @item, :image, size: "200x200", fallback: "no_image.jpg" %>
+    </div>
+    
+    <div class="col-md-6">
+      <!--名前-->
+      <h4><b><%= @item.name %></b></h4>
+      <!--説明-->
+      <p><%= @item.introduction %></p>
+      <!--値段-->
+      <p><span style="font-size: 25px;">¥<%= @item.price * 1.1 %></span>(税込)</p>
+      <!--個数-->
+      <div class="btn-toolbar">
+        <%= form_with(model: @item, local: true) do |f| %>
+          <div class="btn-group">
+            <%= f.select :count, {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5}, { include_blank: '個数選択'}, { class: 'form-control' , required: true } %>
+          </div>
+          <div class="btn-group ml-3">
+            <%= f.submit 'カートに入れる', class: 'btn btn-primary btn-block' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

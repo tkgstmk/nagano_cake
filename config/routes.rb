@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     root 'homes#top'
     get '/about' => 'homes#about'
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+    resources :items, only: [:index, :show]
   end
   
   scope module: :admin do

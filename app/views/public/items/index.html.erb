@@ -1,0 +1,59 @@
+<%= render :partial => "public/list" %>
+
+<div class="container px-sm-0" >
+  <div class="row">
+    <div class="col-2 mt-4">
+      <!--ジャンル検索-->
+      <%# @genres.each do |genre| %>
+      <table class="table-bordered">
+        <tr>
+          <td>ジャンル検索</td>
+        </tr>
+        <tr>
+          <td><%#= genre.name %></td>
+        </tr>
+      </table>
+      <%# end %>
+    </div>
+
+    <div class="col-10 mt-4">
+    <div>
+      <h3>商品一覧</h3><p>(全x件)</p>
+    </div>
+    
+    <div class="d-flex flex-row col-md-4">
+      <% @items.each do |item| %>
+      
+      <ul style="list-style: none;">
+        <%= link_to item_path(item) do %>
+        <li><%= attachment_image_tag item, :image, size: "75x75", fallback: "no_image.jpg" %></li>
+        <%#= image_tag item.image,size: "50x50", fallback: "noimage.jpg" %>
+        <%#= image_tag('sample-author1.jpg') %>
+        <!--image_tag post.picture.to_s-->
+        <li><%= item.name %></li>
+        <li>¥ <%= item.price %></li>
+        <% end %>
+      </ul>
+      <% end %>
+    </div>
+    </div>
+  </div>
+  </div>
+  
+      
+    <%#@items.each do |item| %>
+      <!--<div class="col-lg-3 col-md-6 mb-4">-->
+        <%#= image_tag item.image,  size: "50x50", fallback: "noimage.jpg" %>
+        
+        
+        <%#= image_tag('sample-author1.jpg') %>
+        <!--image_tag post.picture.to_s-->
+        
+        
+        
+        <%#= item.name %>
+        <%#= item.price %>
+      <!--</div>-->
+    <%# end %>
+  
+<!--</div>-->
