@@ -1,0 +1,30 @@
+<!--publis-->
+<nav class="navbar navbar-light bg-light mb-2 border-bottom">
+  <!--ロゴ-->
+  <%= image_tag 'logo.jpg', size: "80x80" %>
+  <div>
+    <ul class="nav pull-right nav-pills">
+    <% if admin_signed_in? %>
+      <li class="nav-list"><%= link_to "マイページ", customers_mypage_path, class:'btn btn-outline-dark' %></li>
+      <li class="nav-list"><%= link_to "商品一覧", admin_items_path, class:'btn btn-outline-dark' %></li>
+      <li class="nav-list"><%#= link_to "カート", cart_items_path, class:'btn btn-outline-dark' %></li>
+      <li class="nav-list"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-outline-dark" %></li>
+    <% else %>
+      <li class="nav-list"><%= link_to "About", class:"btn btn-outline-dark" %></li>
+      <li class="nav-list"><%= link_to "商品一覧", class:"btn btn-outline-dark" %></li>
+      <li class="nav-list"><%= link_to "新規登録", class:"btn btn-outline-dark" %></li>
+      <li class="nav-list"><%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-dark" %></li>
+    <% end %>
+    </ul>
+    <ul class="nav pull-right">
+      <li>
+        <%= form_tag customers_path, :method => 'get' do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search", :name => nil %>
+        </p>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   
   devise_for :admins, controllers: {
-  sessions:      'admins/sessions',
-  passwords:     'admins/passwords',
-  registrations: 'admins/registrations'
+    sessions:      'admins/sessions'
+    # passwords:     'admins/passwords',
+    # registrations: 'admins/registrations'
   }
   
   devise_for :customers, controllers: {
@@ -15,6 +15,16 @@ Rails.application.routes.draw do
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
+  scope module: :public do
+    resources :customers, only: [:edit, :update]
+    get '/customers/mypage' => 'customers#show', as: 'mypage'
+    get '/customers' => 'customers#comfirm', as: 'comfirm'
+    patch '/customers/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
+    root 'homes#top'
+    get '/about' => 'homes#about'
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+  end
+  
   scope module: :admin do
     get 'admins/_list'
     get '/admin' => 'homes#top', as: 'top'
@@ -23,4 +33,9 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show, :update]
   end
+  
+  
 end
+
+
+

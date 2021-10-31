@@ -1,0 +1,50 @@
+<%= render :partial => "public/list" %>
+
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-10 mt-2">
+      <h4><span class="text-dark bg-light">マイページ</span></h4>
+    </div>
+    
+    <div class="mt-2">
+      <b>登録情報　<%= link_to "編集する", edit_customer_path(@customer), class:"btn btn-success" %></b>
+    
+    <div class="mt-2">
+      <table class="table table-bordered">
+        <tr>
+          <td bgcolor="#D3D3D3">氏名</td>
+          <td width="500"><%= @customer.last_name %>　<%= @customer.first_name %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#D3D3D3">カナ</td>
+          <td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#D3D3D3">郵便番号</td>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#D3D3D3">住所</td>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#D3D3D3">電話番号</td>
+          <td><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#D3D3D3">メールアドレス</td>
+          <td><%= @customer.email %></td>
+        </tr>
+      </table>
+    </div>
+    
+    <div>
+      <b>配送先　　<%= link_to '一覧を見る', addresses_path, class:"btn btn-primary" %></b>
+    </div>
+    <div class="mt-2">
+      <b>注文履歴　<%= link_to '一覧を見る', class:"btn btn-primary" %></b>
+    </div>
+    
+    </div>
+  </div>
+</div>
