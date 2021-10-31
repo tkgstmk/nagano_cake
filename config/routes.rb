@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about'
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :items, only: [:index, :show]
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    delete '/cart_items' => 'cart_items#destroy_all'
   end
   
   scope module: :admin do

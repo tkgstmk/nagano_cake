@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   has_many :orders
+  has_many :cart_items
          
   enum payment_method: { 有効: true, 無効: false }
 end
