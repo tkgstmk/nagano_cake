@@ -6,6 +6,7 @@ class Customer < ApplicationRecord
          
   has_many :orders
   has_many :cart_items
+  has_many :addresses
          
   enum payment_method: { 有効: true, 無効: false }
 end

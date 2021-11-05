@@ -6,6 +6,7 @@
       
       <div class="top">
         <h4><span class="text-dark bg-light">ショッピングカート</span></h4>
+        
 
         <div class="text-right">
           <%= link_to 'カートを空にする','/cart_items', method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class:"btn btn-danger" %>
@@ -21,6 +22,7 @@
           <td bgcolor="#D3D3D3" width="100px"></td>
         </tr>
         <% @cart_items.each do |item| %>
+        <%= f.hidden_field :item_id, :value => @item.name %>
         <tr>
           <td>
             <ul class="nav pull-right nav-pills">
