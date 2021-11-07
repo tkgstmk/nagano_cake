@@ -4,17 +4,20 @@
     <div class="col-10 mt-2">
       
       <h4><span class="text-dark bg-light">注文情報入力</span></h4>
-      <%= form_with model: @order, url: orders_path, local: true do |f| %>
-      
+      <%= form_with model: @order, url: confirm_path, local: true do |f| %>
+      <%= f.hidden_field :payment_method, value: @order.id %>
+      <%= f.hidden_field :address, value: @order.id %>
+      <%= f.hidden_field :postal_code, value: @order.id %>
+      <%= f.hidden_field :name, value: @order.id %>
       <h5 class="mt-3"><b>注文方法</b></h5>
       <div class="pl-4">
         <div>
-          <%= f.radio_button :payment_method, "credit_card" %>
+          <%= f.radio_button :payment_method, "クレジットカード" %>
           <%= f.label :payment_method, "クレジットカード" %>
         </div>
         
         <div>
-          <%= f.radio_button :payment_method, "transfer" %>
+          <%= f.radio_button :payment_method, "銀行振込" %>
           <%= f.label :payment_method, "銀行振込" %>
         </div>
       </div>

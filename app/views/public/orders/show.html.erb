@@ -18,11 +18,11 @@
         </tr>
         <tr>
           <td>支払方法</td>
-          <td><%= @address.payment_method %><td>
+          <td><%= @order.payment_method %><td>
         </tr>
         <tr>
           <td>ステータス</td>
-          <td><%= @address.status %><td>
+          <td><%= @order.status %><td>
         </tr>
       </table>
 
@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <th>ご請求額</th>
-          <td><%= @order.total_payment + @order.postage %><td>
+          <td><%= (@order.total_payment).to_i + (@order.postage).to_i %><td>
         </tr>
       </table>
     </div>
@@ -51,13 +51,14 @@
           <td>個数</td>
           <td>小計</td>
         </tr>
-        <% @orders.each do |order| %>
+        <% @order_details.each do |order_detail| %>
         <tr>
-          <td><%= order.item %><td>
-          <td><%= order.item.price * 1.1 %><td>
-          <td><%= order.amount %><td>
-          <td><%= order.item.price * 1.1 * order.amount %><td>
+          <td><%= order_detail.item %><td>
+          <td><%= order_detail.item.price * 1.1 %><td>
+          <td><%= order_detail.amount %><td>
+          <td><%= order_detail.item.price * 1.1 * order_detail.amount %><td>
         </tr>
+        <% end %>
       </table>
       
     </div>

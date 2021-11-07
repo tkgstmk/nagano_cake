@@ -4,7 +4,8 @@ class Public::ItemsController < ApplicationController
   end
   
   def show
-    @item = Item.new
+    @item = Item.find(params[:id])
+    @cart_item = CartItem.new
     # redirect_to cart_items_path
   end
   

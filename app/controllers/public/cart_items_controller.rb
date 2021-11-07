@@ -1,6 +1,7 @@
 class Public::CartItemsController < ApplicationController
   def index
-    @cart_items = CartItem.all
+    @cart_items = current_customer.cart_items
+    # @order = Order.find(current_customer)
   end
   
   
@@ -9,13 +10,34 @@ class Public::CartItemsController < ApplicationController
     @cart_item = CartItem.find(params[:id])  # データ（レコード）を1件取得
     @cart_item.destroy  # データ（レコード）を削除
     redirect_to cart_items_path  # 投稿一覧画面へリダイレクト
+    
   end
   
   def destroy_all
     @cart_items = CartItem.all
-    @cart_items.destroy
-    redirect_to cart_item_path(cart_item) 
-    
+    @cart_items.destroy_all
+    redirect_to cart_items_path
+  end
+  
+  def create
+    @cart_item = CartItem.new(cart_items_params)
+    @cart_item.customer_id = current_customer.id
+    if @cart_item.save!
+      redirect_to cart_items_path
+    else
+      @item = Item.find(params[:cart_item][:item_id])
+      render template: 'public/items/show'
+    end
+  end
+  
+  def update
+    @cart_items = CartItem.find(params[:id])
+    if @cart_items.update_attributes(cart_items_params)
+      flash[:notice] = "アイテムを作成しました"
+      redirect_to cart_items_path
+    else
+      render :index
+    end
   end
   
   private

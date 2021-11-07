@@ -4,7 +4,8 @@
 
 <div class="container px-1 px-sm-0" >
   <table>
-  <%= form_with model: @cart_item, url: cart_items_path, local:true do |f| %>
+  <% @sum = 0 %>
+  <% @cart_items.each do |cart_item| %>
     <tr　class="thead-light">
       <th>商品名</th>
       <th>単価（税込）</th>
@@ -12,51 +13,37 @@
       <th>小計</th>
     </tr>
     <tr>
-      <td><%= f.text_field :image_id %><%= f.text_field :name %><td>
-      <td><%= f.text_field :price %><td>
-      <td><%= f.text_field :amount %><td>
-      <td><%= f.text_field :price %><td>
+      <td><%= attachment_image_tag cart_item.item, :image, size: "50x50", fallback: "noimage.png" %><%= cart_item.item.name %><td>
+      <td><%= cart_item.item.price %><td>
+      <td><%= cart_item.amount %><td>
+      <td><%= cart_item.item.price * cart_item.amount %><td>
     </tr>
+    <% @sum +=  (cart_item.item.price * 1.1).floor * cart_item.amount %>
     <% end %>
   </table>
-    
+  
+  <% @order.postage = 800 %>
+  <% @order.total_payment = @order.postage + @sum %>
     
 <div class>
-  <%= form_with model: @orders, url: cart_items_path, local:true do |f| %>
     <tr>
       <th>送料</th>
-      <td><%= f.text_field :postage %><td>
+      <td><%= @order.postage %><td>
     </tr>
     
     <tr>
-      <th id="address">商品合計</th>
-      <td><%= f.text_field :postage %><td>
+      <th>商品合計</th>
+      <td><%= @sum %><td>
     </tr>
     
     <tr>
       <th>請求金額</th>
-      <td><%= f.text_field :total_payment %><td>
-    </tr>
-  <% end %>
-  </table>
-  
-  <%= form_with model: @orders, url: cart_items_path, local:true do |f| %>
-  <table>
-    <tr>
-      <th>送料</th>
-      <td><%= f.text_field :postage %><td>
-    </tr>
-    
-    <tr>
-      <th id="address">商品合計</th>
-      <td><%= f.text_field :postage %><td>
+      <td><%= @order.total_payment %><td>
     </tr>
   </table>
   
-  <p>支い方法</p><%= f.text_field :payment_method %>
-  <p>お届け先</p><%= f.text_field :postal_code %><%= f.text_field :address %><%= f.text_field :name %>
   
-  <% end %>
+  <p>支い方法</p><%= @order.payment_method %>
+  <p>お届け先</p><%= @order.postal_code %><%= @order.address %><%= @order.name %>
   
-<%= f.submit '注文履歴を確定する', class:"btn btn-success" %>
-    
+  <%= link_to '注文を確定する', thanks_path, class:'btn btn-primary btn-block'%>
