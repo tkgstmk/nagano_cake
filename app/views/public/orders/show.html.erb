@@ -1,66 +1,65 @@
 <%= render :partial => "public/list" %>
 <div class="container">
   <div class="row no-gutters">
-    <div class="col-10 mt-2">
-      
-      <h4><span class="text-dark bg-light">注文履歴詳細</span></h4>
-      
-      <div class="d-flex flex-row">
-      <p>注文情報</p>
-      <table class="table table-bordered mt-4">
+    <h4><span class="text-dark bg-light">注文履歴詳細</span></h4>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 mt-2">
+      <div class="mt-4">注文情報</div>
+      <table class="table table-bordered">
         <tr>
-          <td>注文日</td>
-          <td><%= @order.created_at %><td>
+          <td bgcolor="#D3D3D3">注文日</td>
+          <td><%= @order.created_at.to_s(:datetime_jp) %></td>
         </tr>
         <tr>
-          <td>配送先</td>
-          <td><%= @order.address %><td>
+          <td bgcolor="#D3D3D3">配送先</td>
+          <td><%= @order.address %></td>
         </tr>
         <tr>
-          <td>支払方法</td>
-          <td><%= @order.payment_method %><td>
+          <td bgcolor="#D3D3D3">支払方法</td>
+          <td><%= @order.payment_method %></td>
         </tr>
         <tr>
-          <td>ステータス</td>
-          <td><%= @order.status %><td>
-        </tr>
-      </table>
-
-      <p>請求情報</p>
-      <table class="table table-bordered mt-4">
-        <tr>
-          <td>商品合計</td>
-          <td><%= @order.total_payment %><td>
-        </tr>
-        <tr>
-          <td>配送料</td>
-          <td><%= @order.postage %><td>
-        </tr>
-        <tr>
-          <th>ご請求額</th>
-          <td><%= (@order.total_payment).to_i + (@order.postage).to_i %><td>
+          <td bgcolor="#D3D3D3">ステータス</td>
+          <td><%= @order.status %></td>
         </tr>
       </table>
     </div>
-
+    <div class="col-lg-6 mt-2">
+      <div class="mt-4">請求情報</div>
+      <table class="table table-bordered">
+        <tr>
+          <td bgcolor="#D3D3D3">商品合計</td>
+          <td><%= @order.total_payment %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#D3D3D3">配送料</td>
+          <td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#D3D3D3">ご請求額</td>
+          <td><%= (@order.total_payment).to_i + (@order.postage).to_i %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
     <p>注文内容</p>
-      <table>
-        <tr>
-          <td>商品</td>
-          <td>単価（税込）</td>
-          <td>個数</td>
-          <td>小計</td>
-        </tr>
-        <% @order_details.each do |order_detail| %>
-        <tr>
-          <td><%= order_detail.item %><td>
-          <td><%= order_detail.item.price * 1.1 %><td>
-          <td><%= order_detail.amount %><td>
-          <td><%= order_detail.item.price * 1.1 * order_detail.amount %><td>
-        </tr>
-        <% end %>
-      </table>
-      
-    </div>
+    <table class="table table-bordered">
+      <tr>
+        <td bgcolor="#D3D3D3">商品</td>
+        <td bgcolor="#D3D3D3">単価（税込）</td>
+        <td bgcolor="#D3D3D3">個数</td>
+        <td bgcolor="#D3D3D3">小計</td>
+      </tr>
+      <% @cart_items.each do |cart_item| %>
+      <tr>
+        <td><%= cart_item.item.name %></td>
+        <td><%= (cart_item.item.price * 1.1).floor %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= (cart_item.item.price * 1.1 * cart_item.amount).floor  %></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 </div>

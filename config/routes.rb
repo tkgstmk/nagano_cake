@@ -26,9 +26,10 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:index, :update, :destroy, :create]
     delete '/cart_items' => 'cart_items#destroy_all'
+    post '/orders/confirm' => 'orders#confirm', as: 'confirm'
     get 'orders/thanks' => 'orders#thanks', as: 'thanks'
     resources :orders, only: [:new, :create, :index, :show]
-    post '/orders/confirm' => 'orders#confirm', as: 'confirm'
+    
   end
   
   scope module: :admin do
