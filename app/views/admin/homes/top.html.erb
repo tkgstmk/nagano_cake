@@ -15,7 +15,13 @@
           </tr>
           <% @orders.each do |order| %>
           <tr>
-            <td><%= order.created_at.to_s(:datetime_jp) %></td>
+            <td>
+              <!--<a href="/orders/:id'">-->
+              <%= link_to admin_order_path(order.id) do %>
+                <%= order.created_at.to_s(:datetime_jp) %>
+              <% end %>
+              <!--</a>-->
+            </td>
             <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
             <td><%= order.order_details.sum(:amount) %></td>
             <td><%= order.status %></td>

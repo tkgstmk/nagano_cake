@@ -31,7 +31,7 @@ class Public::CustomersController < ApplicationController
       redirect_to root_path
     end
     
-
+    
     
     private
 

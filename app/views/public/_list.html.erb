@@ -18,12 +18,12 @@
     </ul>
     <ul class="nav pull-right pt-2">
       <li>
-        <%= form_tag customers_path, :method => 'get' do %>
+        <%#= form_tag customers_path, :method => 'get' do %>
         <p>
           <%= text_field_tag :search, params[:search] %>
           <%= submit_tag "Search", :name => nil %>
         </p>
-        <% end %>
+        <%# end %>
       </li>
     </ul>
   </div>

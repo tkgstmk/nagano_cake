@@ -43,13 +43,13 @@
           </tr>
           <tr>
             <td>会員ステータス</td>
-            <td><%= @customer.is_active %></td>
+            <td><font color="#008000"><%= @customer.is_active %></font></td>
             <td></td>
           </tr>
           <tr>
             <td></td>
-            <td><%= link_to '編集する', edit_customer_path(@customer) %></td>
-            <td><%= link_to '注文履歴一覧画面を見る' %></td>
+            <td><%= link_to '編集する', edit_admin_customer_path(@customer), class:"btn btn-success" %></td>
+            <td><%= link_to '注文履歴一覧画面を見る', admin_top_path, class:"btn btn-primary" %></td>
           </tr>
         </table>
       </div>

@@ -29,16 +29,15 @@ Rails.application.routes.draw do
     post '/orders/confirm' => 'orders#confirm', as: 'confirm'
     get 'orders/thanks' => 'orders#thanks', as: 'thanks'
     resources :orders, only: [:new, :create, :index, :show]
-    
   end
   
-  scope module: :admin do
-    get 'admins/_list'
-    get '/admin' => 'homes#top', as: 'top'
+  namespace :admin do
+    resources :orders, only: [:show, :update]
     resources :genres, only: [:index, :edit, :create, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :orders, only: [:show, :update]
+    resources :order_details, only: [:update]
+    get '/admin' => 'homes#top', as: 'top'
   end
   
   

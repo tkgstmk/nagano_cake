@@ -8,5 +8,5 @@ class Customer < ApplicationRecord
   has_many :cart_items
   has_many :addresses
          
-  enum payment_method: { 有効: true, 無効: false }
+  enum is_active: { 有効: true, 無効: false }
 end
