@@ -13,6 +13,5 @@ class Order < ApplicationRecord
     # end
     # array.sum #ここで合計を求める
     
-    # Order.all.sum(:count)
     
 end
