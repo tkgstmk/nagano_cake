@@ -1,7 +1,7 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
-    @addresses = Address.all
+    @addresses = current_customer.addresses
     @customer = current_customer
     # redirect_to confirm_path
   end
@@ -17,12 +17,13 @@ class Public::OrdersController < ApplicationController
       @order.address = current_customer.address
       @order.name = current_customer.first_name + current_customer.last_name
     elsif params[:order][:address_select_method] == 'post_address' then
-      @order.postal_code = Order.find(params[:id])
-      @order.address = Order.find(params[:id])
-      @order.name = Order.find(params[:id])
-    else 
-      # params[:order][:address_select_method] == 'new_address'
-      @order = Order.new
+      @order.postal_code = Address.find(params[:order][:address_id]).postal_code
+      @order.address = Address.find(params[:order][:address_id]).address
+      @order.name = Address.find(params[:order][:address_id]).name
+    else params[:order][:address_select_method] == 'new_address'
+      @order.postal_code = Order.find(params[:order][:postal_code])
+      @order.address = Order.find(params[:order][:address])
+      @order.name = Order.find(params[:order][:name])
     end
   end
   
@@ -48,9 +49,9 @@ class Public::OrdersController < ApplicationController
   end
   
   def show
-    @orders = current_customer.orders
+    # @orders = current_customer.orders
     @order = Order.find(params[:id])
-    @cart_items = current_customer.cart_items
+    @cart_items = cart_item.find(params[:id])
     # @order_details = @order.order_details
   end
   

@@ -28,12 +28,14 @@
     <div class="d-flex flex-row col-md-4">
       <% @items.each do |item| %>
       <ul style="list-style: none;">
+        <%= link_to item_path(item) do %>
         <li><%= attachment_image_tag item, :image, size: "75x75", fallback: "no_image.jpg" %></li>
         <%#= image_tag item.image,size: "50x50", fallback: "noimage.jpg" %>
         <%#= image_tag('sample-author1.jpg') %>
         <!--image_tag post.picture.to_s-->
         <li><%= item.name %></li>
         <li>¥ <%= item.price %></li>
+        <% end %>
       </ul>
       <% end %>
     </div>

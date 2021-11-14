@@ -1,56 +1,69 @@
 <%= render :partial => "public/list" %>
-
-<h4>注文情報確認</h4>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-10 mt-2">
+      
+      <h4><span class="text-dark bg-light">注文情報確認</span></h4>
 
 <div class="container px-1 px-sm-0" >
-  <table>
-  <% @sum = 0 %>
-  <% @cart_items.each do |cart_item| %>
-    <tr　class="thead-light">
-      <th>商品名</th>
-      <th>単価（税込）</th>
-      <th>数量</th>
-      <th>小計</th>
-    </tr>
-    <tr>
-      <td><%= attachment_image_tag cart_item.item, :image, size: "50x50", fallback: "noimage.png" %><%= cart_item.item.name %><td>
-      <td><%= cart_item.item.price %><td>
-      <td><%= cart_item.amount %><td>
-      <td><%= cart_item.item.price * cart_item.amount %><td>
-    </tr>
-    <% @sum +=  (cart_item.item.price * 1.1).floor * cart_item.amount %>
+  <div class="row">
+    <div class="col-8">
+      
+      <table class="table table-bordered">
+        <tr　class="thead-light">
+          <td bgcolor="#D3D3D3">商品名</td>
+          <td bgcolor="#D3D3D3">単価（税込）</td>
+          <td bgcolor="#D3D3D3">数量</td>
+          <td bgcolor="#D3D3D3">小計</td>
+        </tr>
+        <tr>
+        <% @sum = 0 %>
+        <% @cart_items.each do |cart_item| %>
+          <td><%= attachment_image_tag cart_item.item, :image, size: "50x50", fallback: "noimage.png" %><%= cart_item.item.name %></td>
+          <td><%= cart_item.item.price %></td>
+          <td><%= cart_item.amount %></td>
+          <td><%= cart_item.item.price * cart_item.amount %></td>
+        </tr>
+        <% @sum +=  (cart_item.item.price * 1.1).floor * cart_item.amount %>
+        <% end %>
+      </table>
+    </div>
+    
+    <div class="col-4">
+    <% @order.postage = 800 %>
+    <% @order.total_payment = @order.postage + @sum %>
+      <table class="table table-bordered">
+        <tr>
+          <td bgcolor="#D3D3D3">送料</td>
+          <td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#D3D3D3">商品合計</td>
+          <td><%= @sum %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#D3D3D3">請求金額</td>
+          <td><%= @order.total_payment %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div><b>支い方法</b>　<%= @order.payment_method %></div>
+    <div class="mt-2"><b>お届け先</b>　<%= @order.postal_code %><%= @order.address %><%= @order.name %></div>
+    <%= form_with model: @order, url: orders_path, local: true do |f| %>
+      <%= f.hidden_field :payment_method, value: @order.payment_method %>
+      <%= f.hidden_field :address, value: @order.address %>
+      <%= f.hidden_field :postal_code, value: @order.postal_code %>
+      <%= f.hidden_field :postage, value: @order.postage %>
+      <%= f.hidden_field :total_payment, value: @order.total_payment %>
+      <%= f.hidden_field :name, value: @order.name %>
+  </div>
+  
+  <div class="row justify-content-center mt-5" >
+    <%= f.submit '注文を確定する', class:'btn btn-primary'%>
+    <%#= f.submit '確認画面へ進む',class:"btn btn-primary" %>
+  </div>
+
     <% end %>
-  </table>
-  
-  <% @order.postage = 800 %>
-  <% @order.total_payment = @order.postage + @sum %>
-    
-<div class>
-    <tr>
-      <th>送料</th>
-      <td><%= @order.postage %><td>
-    </tr>
-    
-    <tr>
-      <th>商品合計</th>
-      <td><%= @sum %><td>
-    </tr>
-    
-    <tr>
-      <th>請求金額</th>
-      <td><%= @order.total_payment %><td>
-    </tr>
-  </table>
-  
-  
-  <p>支い方法</p><%= @order.payment_method %>
-  <p>お届け先</p><%= @order.postal_code %><%= @order.address %><%= @order.name %>
-  <%= form_with model: @order, url: orders_path, local: true do |f| %>
-    <%= f.hidden_field :payment_method, value: @order.payment_method %>
-    <%= f.hidden_field :address, value: @order.address %>
-    <%= f.hidden_field :postal_code, value: @order.postal_code %>
-    <%= f.hidden_field :postage, value: @order.postage %>
-    <%= f.hidden_field :total_payment, value: @order.total_payment %>
-    <%= f.hidden_field :name, value: @order.name %>
-    <%= f.submit '注文を確定する', class:'btn btn-primary btn-block' %>
-  <% end %>

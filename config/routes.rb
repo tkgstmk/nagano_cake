@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     get '/customers' => 'customers#comfirm', as: 'comfirm'
     patch '/customers/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
     root 'homes#top'
-    get '/about' => 'homes#about'
+    get '/about' => 'homes#about', as: 'about'
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:index, :update, :destroy, :create]

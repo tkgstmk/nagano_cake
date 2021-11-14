@@ -6,18 +6,18 @@
     <ul class="nav pull-right nav-pills">
     <% if admin_signed_in? %>
       <li class=""><%= link_to "商品一覧", items_path, class:'btn btn-outline-dark' %></li>
-      <li class="nav-list"><%= link_to "会員一覧", class:'btn btn-outline-dark' %></li>
-      <li class="nav-list"><%= link_to "注文履歴一覧", class:'btn btn-outline-dark' %></li>
-      <li class="nav-list"><%= link_to "ジャンル一覧", genres_path, class:'btn btn-outline-dark' %></li>
-      <li class="nav-list"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-outline-dark" %></li>
+      <li class="nav-list pl-2"><%= link_to "会員一覧", customers_path, class:'btn btn-outline-dark' %></li>
+      <li class="nav-list pl-2"><%= link_to "注文履歴一覧", "/orders/:id", class:'btn btn-outline-dark' %></li>
+      <li class="nav-list pl-2"><%= link_to "ジャンル一覧", genres_path, class:'btn btn-outline-dark' %></li>
+      <li class="nav-list pl-2"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-outline-dark" %></li>
     <% else %>
-      <li class="nav-list"><%= link_to "About", class:"btn btn-outline-dark" %></li>
-      <li class="nav-list"><%= link_to "商品一覧", items_path, class:"btn btn-outline-dark" %></li>
-      <li class="nav-list"><%= link_to "新規登録", class:"btn btn-outline-dark" %></li>
-      <li class="nav-list"><%= link_to "ログイン", class:"btn btn-outline-dark" %></li>
+      <li class="nav-list pl-2"><%= link_to "About", about_path, class:"btn btn-outline-dark" %></li>
+      <li class="nav-list pl-2"><%= link_to "商品一覧", items_path, class:"btn btn-outline-dark" %></li>
+      <li class="nav-list pl-2"><%= link_to "新規登録", new_customer_registration_path, class:"btn btn-outline-dark" %></li>
+      <li class="nav-list pl-2"><%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-dark" %></li>
     <% end %>
     </ul>
-    <ul class="nav pull-right">
+    <ul class="nav pull-right pt-2">
       <li>
         <%#= form_tag customers_path, :method => 'get' do %>
         <p>
