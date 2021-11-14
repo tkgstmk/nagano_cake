@@ -1,4 +1,8 @@
 class Public::OrdersController < ApplicationController
+  
+  before_action :authenticate_customer!
+  before_action :is_cart_item, only: ["new", "create", "confirm"]
+  
   def new
     @order = Order.new
     @addresses = current_customer.addresses
@@ -20,10 +24,8 @@ class Public::OrdersController < ApplicationController
       @order.postal_code = Address.find(params[:order][:address_id]).postal_code
       @order.address = Address.find(params[:order][:address_id]).address
       @order.name = Address.find(params[:order][:address_id]).name
-    else params[:order][:address_select_method] == 'new_address'
-      @order.postal_code = Order.find(params[:order][:postal_code])
-      @order.address = Order.find(params[:order][:address])
-      @order.name = Order.find(params[:order][:name])
+    elsif params[:order][:address_select_method] == 'new_address'
+      @order = Order.new(order_params)
     end
   end
   
@@ -32,14 +34,22 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     if @order.save
       flash[:notice] = "アイテムを作成しました"
-      @cart_items = CartItem.all
+      
+      @cart_items = current_customer.cart_items
+      @cart_items.each do |cart_item|
+        order_detail = @order.order_details.new
+        order_detail.item_id = cart_item.item_id
+        order_detail.amount = cart_item.amount
+        order_detail.price = cart_item.item.price
+        order_detail.save!
+      end
       @cart_items.destroy_all
       redirect_to thanks_path
     else
-      # @genres = Genre.all
       render :confirm
     end
   end
+ 
   
   def thanks
   end
@@ -51,8 +61,8 @@ class Public::OrdersController < ApplicationController
   def show
     # @orders = current_customer.orders
     @order = Order.find(params[:id])
-    @cart_items = cart_item.find(params[:id])
-    # @order_details = @order.order_details
+    @order_details = @order.order_details
+    p OrderDetail.all
   end
   
   
@@ -60,5 +70,11 @@ class Public::OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(:id, :customer_id, :postal_code, :address, :name, :postage, :total_payment, :payment_method, :status)
+  end
+  
+  def is_cart_item
+    unless CartItem.where(customer_id: current_customer.id).present?
+      redirect_to cart_items_path
+    end
   end
 end
