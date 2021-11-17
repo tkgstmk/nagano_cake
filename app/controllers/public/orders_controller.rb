@@ -39,6 +39,8 @@ class Public::OrdersController < ApplicationController
       @cart_items.each do |cart_item|
         order_detail = @order.order_details.new
         order_detail.item_id = cart_item.item_id
+        order_detail.customer_id = cart_item.customer.id
+        order_detail.order_id = @order.id
         order_detail.amount = cart_item.amount
         order_detail.price = cart_item.item.price
         order_detail.save!

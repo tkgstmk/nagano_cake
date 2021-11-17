@@ -7,6 +7,10 @@ class Customer < ApplicationRecord
   has_many :orders
   has_many :cart_items
   has_many :addresses
+  
+  def active_for_authentication?
+    super && (self.is_active == "有効")
+  end
          
   enum is_active: { 有効: true, 無効: false }
 end

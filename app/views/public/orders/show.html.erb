@@ -30,7 +30,13 @@
       <table class="table table-bordered">
         <tr>
           <td bgcolor="#D3D3D3">商品合計</td>
-          <td><%= @order.total_payment %></td>
+          <td>
+            <% @sum = 0 %>
+              <% @order_details.each do |order_detail| %>
+              <% @sum +=  (order_detail.price * 1.1 * order_detail.amount).to_i %>
+            <% end %>
+            <%= @sum %>
+          </td>
         </tr>
         <tr>
           <td bgcolor="#D3D3D3">配送料</td>
@@ -38,7 +44,7 @@
         </tr>
         <tr>
           <td bgcolor="#D3D3D3">ご請求額</td>
-          <td><%= (@order.total_payment).to_i + (@order.postage).to_i %></td>
+          <td><%= (@order.total_payment).to_i %><%#= (@order.total_payment).to_i + (@order.postage).to_i %></td>
         </tr>
       </table>
     </div>

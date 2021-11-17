@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  protect_from_forgery with: :null_session
   
   def after_sign_in_path_for(resource)
     case resource
@@ -15,7 +16,7 @@ class ApplicationController < ActionController::Base
     when :admin
       new_admin_session_path
     when :customer
-      new_customer_session_path
+      root_path
     end
   end
   
